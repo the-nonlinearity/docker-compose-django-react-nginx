@@ -28,9 +28,10 @@ Now lets create the Dockerfile to run the frontend application as a docker image
 ```dockerfile
 FROM node:16.6
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+# Install dependencies
+COPY package.json /app
 
 RUN yarn install
 
@@ -58,8 +59,8 @@ up the basic configs, so add the `frontend` service to your `docker-compose.yaml
     build: ./frontend
     container_name: react-frontend
     volumes:
-      - ./:/app
       - /app/node_modules
+      - ./frontend:/app
     ports:
       - "3000:3000"
     depends_on:
@@ -80,8 +81,8 @@ Update the `docker-compose.yml` as follows:
     build: ./frontend
     container_name: react-frontend
     volumes:
-      - ./:/app
       - /app/node_modules
+      - ./frontend:/app
     depends_on:
       - backend
     networks:
@@ -200,8 +201,8 @@ services:
     build: ./frontend
     container_name: react-frontend
     volumes:
-      - ./:/app
       - /app/node_modules
+      - ./frontend:/app
     depends_on:
       - backend
     networks:
@@ -242,6 +243,43 @@ volumes:
   static_volume:
   media_volume:
 ```
+
+Now you likely also want to modify your compose file to load updates you make to the source code, so we add the 
+following to the yaml definition.
+
+```yaml 
+
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    stdin_open: true  <-- Add here
+    tty: true         <-- Add here
+    volumes:
+      - /app/node_modules
+      - ./frontend:/app
+    depends_on:
+      - backend
+    networks:
+      - nginx_network
+```
+
+This allows your source code to be reloaded in the volume you created for the frontend. All you need to do is hit
+refresh in your browser after saving your code changes. 
+
+## NginX: Hook up the backend with your frontend
+
+The last thing we would like to do is hook up our backend api with our frontend React application.
+
+Todo:
+
+
+## Conclusion
+
+I created the setup in this way in order to have a reuseable development environment in which you can easily swap 
+out the frontend framework or backend framework without modifying the infrastructure. You can also easily add multiple 
+backend or database services if you would like to. Most examples I have found usually only cover a single service, 
+either on the frontend or the backend, therefore I hope this will be helpful to others. 
+
 
 
 
