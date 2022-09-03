@@ -271,6 +271,9 @@ refresh in your browser after saving your code changes.
 The last thing we would like to do is hook up our backend api with our frontend React application.
 
 Todo:
+ - Add djangorestframework and cors to the project
+ - Add axios to frontend
+ - Add api route to Nginx
 
 
 ## Conclusion
@@ -280,10 +283,14 @@ out the frontend framework or backend framework without modifying the infrastruc
 backend or database services if you would like to. Most examples I have found usually only cover a single service, 
 either on the frontend or the backend, therefore I hope this will be helpful to others. 
 
+Add the axios package. 
+`yarn add axios`
 
 
-
-References:
+# References:
 
 [https://reactjs.org/docs/create-a-new-react-app.html](https://reactjs.org/docs/create-a-new-react-app.html)
+[https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/](https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/)
+[https://saasitive.com/tutorial/docker-compose-django-react-nginx-let-s-encrypt/](https://saasitive.com/tutorial/docker-compose-django-react-nginx-let-s-encrypt/)
+[https://github.com/mosesreigns/Build-and-Dockerize-a-Full-stack-React-app-with-Node.js-MySQL-and-Nginx-for-reverse-proxy/blob/main/client/src/App.js](https://github.com/mosesreigns/Build-and-Dockerize-a-Full-stack-React-app-with-Node.js-MySQL-and-Nginx-for-reverse-proxy/blob/main/client/src/App.js)
 [https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/](https://www.section.io/engineering-education/build-and-dockerize-a-full-stack-react-app-with-nodejs-and-nginx/)
